@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin – Quintal do Pedro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            amber: { 500: '#f59e0b', 600: '#d97706' },
+            zinc: { 400:'#a1a1aa',500:'#71717a',600:'#52525b',700:'#3f3f46',800:'#27272a',900:'#18181b',950:'#09090b' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+    input[type=number]::-webkit-inner-spin-button { opacity: 1; }
+    .tab-active { color: #f59e0b; border-bottom-color: #f59e0b; }
+    .tab-inactive { color: #71717a; border-bottom-color: transparent; }
+  </style>
+</head>
+<body class="min-h-screen bg-zinc-950 text-zinc-50">
+
+<!-- LOGIN -->
+<div id="loginScreen" class="min-h-screen flex items-center justify-center px-4"
+     style="background:radial-gradient(ellipse 70% 50% at 50% 40%,rgba(245,158,11,0.08),transparent 70%),#09090b">
+  <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-10 w-full max-w-md text-center">
+    <p class="text-2xl font-black tracking-tighter text-amber-500 mb-1">QUINTAL DO PEDRO</p>
+    <p class="text-zinc-500 text-sm mb-8 tracking-widest uppercase text-xs">Painel Administrativo</p>
+
+    <div class="text-left space-y-4 mb-6">
+      <div>
+        <label class="block text-zinc-400 text-xs font-semibold tracking-widest uppercase mb-2">Usuário</label>
+        <input id="loginUser" type="text" placeholder="admin"
+               class="w-full bg-zinc-800 border border-zinc-700 focus:border-amber-500 rounded-lg px-4 py-3 text-zinc-100 outline-none transition-colors text-sm" />
+      </div>
+      <div>
+        <label class="block text-zinc-400 text-xs font-semibold tracking-widest uppercase mb-2">Senha</label>
+        <input id="loginPass" type="password" placeholder="••••••••"
+               class="w-full bg-zinc-800 border border-zinc-700 focus:border-amber-500 rounded-lg px-4 py-3 text-zinc-100 outline-none transition-colors text-sm"
+               onkeydown="if(event.key==='Enter')doLogin()" />
+      </div>
+    </div>
+
+    <button onclick="doLogin()"
+            class="w-full bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold py-3 rounded-lg transition-colors">
+      Entrar
+    </button>
+
+    <div id="loginError" class="hidden mt-4 bg-red-500/10 border border-red-500/30 text-red-400 rounded-lg px-4 py-3 text-sm">
+      Usuário ou senha incorretos.
+    </div>
+
+    <p class="text-zinc-600 text-xs mt-6 leading-relaxed">
+      Padrão: <span class="text-zinc-400">admin</span> / <span class="text-zinc-400">pedro2025</span><br/>
+      <span class="text-amber-600">Altere no arquivo antes de publicar.</span>
+    </p>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div id="adminApp" class="hidden">
+
+  <!-- Header -->
+  <header class="bg-zinc-950 border-b border-zinc-800/50 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="text-lg font-black tracking-tighter text-amber-500">QUINTAL DO PEDRO</span>
+        <span class="text-zinc-600 text-sm">·</span>
+        <span class="text-zinc-500 text-sm">Admin</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="hidden sm:inline-flex items-center gap-1.5 bg-green-500/10 border border-green-500/20 text-green-500 text-xs font-semibold px-3 py-1 rounded-full">
+          <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Online
+        </span>
+        <a href="index.html" target="_blank" class="text-zinc-500 hover:text-amber-500 text-sm transition-colors hidden sm:block">
+          Ver site →
+        </a>
+        <button onclick="doLogout()"
+                class="border border-zinc-800 hover:border-red-500/50 hover:text-red-400 text-zinc-500 text-xs font-semibold px-4 py-2 rounded-lg transition-all">
+          Sair
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-10">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold tracking-tight mb-1">Gerenciar Preços</h1>
+      <p class="text-zinc-500">Edite os preços do cardápio. Clique em Salvar em cada item ou salve todos de uma vez.</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex border-b border-zinc-800 mb-8 gap-0">
+      <button onclick="switchTab('burgers',this)" id="tab-burgers"
+              class="tab-active border-b-2 px-5 py-3 text-sm font-semibold tracking-wide transition-all">
+        🍔 Hambúrgueres
+      </button>
+      <button onclick="switchTab('porcoes',this)" id="tab-porcoes"
+              class="tab-inactive border-b-2 px-5 py-3 text-sm font-semibold tracking-wide transition-all">
+        🍟 Porções
+      </button>
+      <button onclick="switchTab('bebidas',this)" id="tab-bebidas"
+              class="tab-inactive border-b-2 px-5 py-3 text-sm font-semibold tracking-wide transition-all">
+        🥤 Bebidas
+      </button>
+    </div>
+
+    <!-- Items -->
+    <div id="adminGrid" class="space-y-3"></div>
+
+    <!-- Actions -->
+    <div class="mt-10 pt-8 border-t border-zinc-800 flex flex-wrap gap-4">
+      <button onclick="saveAll()"
+              class="bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold px-6 py-3 rounded-lg transition-colors flex items-center gap-2">
+        <i data-lucide="save" class="w-4 h-4"></i> Salvar Todos os Preços
+      </button>
+      <a href="index.html" target="_blank"
+         class="border border-zinc-700 hover:bg-zinc-800 text-zinc-300 font-semibold px-6 py-3 rounded-lg transition-colors flex items-center gap-2">
+        <i data-lucide="eye" class="w-4 h-4"></i> Ver Site
+      </a>
+      <button onclick="resetAll()"
+              class="border border-zinc-800 hover:border-red-500/40 hover:text-red-400 text-zinc-600 font-semibold px-6 py-3 rounded-lg transition-all flex items-center gap-2">
+        <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Restaurar Padrões
+      </button>
+    </div>
+  </main>
+</div>
+
+<!-- TOAST -->
+<div id="toast"
+     class="fixed bottom-6 right-6 z-[999] bg-zinc-900 border border-green-500/40 text-green-400 font-semibold text-sm px-5 py-3 rounded-xl shadow-xl transition-all duration-300 opacity-0 translate-y-2 pointer-events-none">
+  ✅ Salvo com sucesso!
+</div>
+
+<script>
+const CREDENTIALS = { user: 'admin', pass: 'pedro2025' };
+
+const DEFAULT_MENU = {
+  burgers: [
+    { id:'b1', name:'Hambúrguer Clássico',        desc:'Pão brioche, blend bovino 160g, queijo cheddar, alface, tomate e maionese da casa.', price:32.90 },
+    { id:'b2', name:'Filé Mignon com Gorgonzola', desc:'Tiras de filé mignon suculentas cobertas com molho de gorgonzola artesanal.', price:48.90 },
+    { id:'b3', name:'Smash Bacon',                desc:'Smash burger duplo, bacon crocante, queijo americano e maionese defumada.', price:42.00 },
+    { id:'b4', name:'Caramelizado',               desc:'Blend especial, cebola caramelizada, queijo brie, geleia de pimenta.', price:46.00 },
+    { id:'b5', name:'Spicy Pedro',                desc:'Burger apimentado, jalapeños, molho sriracha e cream cheese.', price:40.00 },
+    { id:'b6', name:'Frango Crocante',            desc:'Frango empanado artesanal, honey mustard, alface americana e picles.', price:35.00 },
+  ],
+  porcoes: [
+    { id:'p1', name:'Batata Rústica',             desc:'Batatas cortadas à mão, temperadas com alecrim, alho e páprica defumada.', price:24.90 },
+    { id:'p2', name:'Salada Caesar',              desc:'Alface americana, croutons, queijo parmesão e molho caesar exclusivo.', price:28.90 },
+    { id:'p3', name:'Onion Rings',                desc:'Anéis de cebola empanados em panko, crocantes. Acompanha barbecue.', price:20.00 },
+    { id:'p4', name:'Batata Frita Tradicional',   desc:'Batata frita crocante temperada com sal e alecrim.', price:18.00 },
+  ],
+  bebidas: [
+    { id:'d1', name:'Milk-shake de Ovomaltine',  desc:'Batido na hora com sorvete premium e muito Ovomaltine crocante.', price:22.90 },
+    { id:'d2', name:'Mojito',                    desc:'Coquetel com hortelã fresca, limão, rum e água gaseificada.', price:26.90 },
+    { id:'d3', name:'Limonada Suíça',            desc:'Limonada cremosa com leite condensado e hortelã.', price:16.00 },
+    { id:'d4', name:'Refrigerante',              desc:'Coca-Cola, Guaraná, Sprite ou água com gás. Gelado.', price:8.00 },
+  ],
+};
+
+let currentTab = 'burgers';
+let menuData = JSON.parse(JSON.stringify(DEFAULT_MENU));
+
+function init() {
+  try {
+    const saved = localStorage.getItem('qp_menu_v2');
+    if (saved) {
+      const prices = JSON.parse(saved);
+      Object.keys(menuData).forEach(cat =>
+        menuData[cat].forEach(item => { if (prices[item.id] !== undefined) item.price = prices[item.id]; })
+      );
+    }
+  } catch(e) {}
+}
+
+function doLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  if (u === CREDENTIALS.user && p === CREDENTIALS.pass) {
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('adminApp').classList.remove('hidden');
+    init(); renderAdmin(); lucide.createIcons();
+  } else {
+    document.getElementById('loginError').classList.remove('hidden');
+  }
+}
+
+function doLogout() {
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('adminApp').classList.add('hidden');
+  document.getElementById('loginPass').value = '';
+}
+
+function switchTab(tab, el) {
+  currentTab = tab;
+  document.querySelectorAll('[id^="tab-"]').forEach(b => {
+    b.classList.remove('tab-active'); b.classList.add('tab-inactive');
+  });
+  el.classList.remove('tab-inactive'); el.classList.add('tab-active');
+  renderAdmin();
+}
+
+function renderAdmin() {
+  const items = menuData[currentTab] || [];
+  document.getElementById('adminGrid').innerHTML = items.map(item => `
+    <div class="bg-zinc-900 border border-zinc-800 hover:border-zinc-700 rounded-xl p-5 flex items-center gap-4 transition-colors">
+      <div class="flex-1 min-w-0">
+        <p class="font-semibold text-zinc-100">${item.name}</p>
+        <p class="text-zinc-500 text-sm truncate mt-0.5">${item.desc}</p>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <span class="text-zinc-500 text-xs font-semibold tracking-widest uppercase hidden sm:block">Preço</span>
+        <div class="flex items-center bg-zinc-800 border border-zinc-700 focus-within:border-amber-500 rounded-lg overflow-hidden transition-colors">
+          <span class="px-3 py-2.5 text-amber-500 font-bold text-sm border-r border-zinc-700 bg-zinc-800/80">R$</span>
+          <input type="number" id="price_${item.id}"
+                 value="${Number(item.price).toFixed(2)}"
+                 min="0" step="0.50"
+                 class="bg-transparent border-none outline-none text-zinc-100 text-sm font-medium w-20 px-3 py-2.5"
+                 onchange="updatePrice('${item.id}',this.value)" />
+        </div>
+        <button onclick="saveSingle('${item.id}')" id="btn_${item.id}"
+                class="bg-green-500/10 hover:bg-green-500/20 border border-green-500/25 text-green-500 text-xs font-bold px-4 py-2.5 rounded-lg transition-all whitespace-nowrap">
+          Salvar
+        </button>
+      </div>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+function updatePrice(id, val) {
+  Object.keys(menuData).forEach(cat => {
+    const item = menuData[cat].find(i => i.id === id);
+    if (item) item.price = parseFloat(val) || 0;
+  });
+}
+
+function saveSingle(id) {
+  updatePrice(id, document.getElementById('price_' + id).value);
+  persist();
+  const btn = document.getElementById('btn_' + id);
+  btn.textContent = '✅ Salvo!';
+  setTimeout(() => { btn.textContent = 'Salvar'; }, 2000);
+}
+
+function saveAll() {
+  document.querySelectorAll('input[id^="price_"]').forEach(inp => {
+    updatePrice(inp.id.replace('price_', ''), inp.value);
+  });
+  persist();
+  showToast('✅ Todos os preços salvos!');
+}
+
+function persist() {
+  const prices = {};
+  Object.keys(menuData).forEach(cat => menuData[cat].forEach(i => { prices[i.id] = i.price; }));
+  localStorage.setItem('qp_menu_v2', JSON.stringify(prices));
+}
+
+function resetAll() {
+  if (!confirm('Restaurar todos os preços para o padrão?')) return;
+  menuData = JSON.parse(JSON.stringify(DEFAULT_MENU));
+  localStorage.removeItem('qp_menu_v2');
+  renderAdmin();
+  showToast('↺ Preços restaurados para o padrão.');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.remove('opacity-0', 'translate-y-2');
+  t.classList.add('opacity-100', 'translate-y-0');
+  setTimeout(() => { t.classList.add('opacity-0', 'translate-y-2'); t.classList.remove('opacity-100', 'translate-y-0'); }, 3000);
+}
+
+lucide.createIcons();
+</script>
+</body>
+</html>

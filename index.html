@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quintal do Pedro – Hamburgueria Gourmet</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            amber: { 500: '#f59e0b', 600: '#d97706' },
+            zinc: { 400:'#a1a1aa',500:'#71717a',600:'#52525b',700:'#3f3f46',800:'#27272a',900:'#18181b',950:'#09090b' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+    html { scroll-behavior: smooth; }
+    ::selection { background: rgba(245,158,11,0.3); }
+    .line-clamp-2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .menu-card { border-color: #27272a; transition: border-color 0.3s; }
+    .menu-card:hover { border-color: rgba(245,158,11,0.5) !important; }
+    .menu-card:hover .card-title { color: #f59e0b; }
+    .menu-card:hover .chevron-row { transform: translateX(4px); color: #f59e0b; }
+    .chevron-row { transition: transform 0.2s, color 0.2s; }
+    .img-zoom { overflow: hidden; }
+    .img-zoom img { transition: transform 0.7s ease; }
+    .img-zoom:hover img { transform: scale(1.1); }
+  </style>
+</head>
+<body class="min-h-screen bg-zinc-950 text-zinc-50">
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/50">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <span class="text-xl font-black tracking-tighter text-amber-500">QUINTAL DO PEDRO</span>
+    <div class="hidden md:flex gap-8 text-sm font-medium">
+      <a href="#inicio"   class="text-zinc-300 hover:text-amber-500 transition-colors">Início</a>
+      <a href="#sobre"    class="text-zinc-300 hover:text-amber-500 transition-colors">Sobre</a>
+      <a href="#cardapio" class="text-zinc-300 hover:text-amber-500 transition-colors">Cardápio</a>
+      <a href="#contato"  class="text-zinc-300 hover:text-amber-500 transition-colors">Contato</a>
+    </div>
+    <a href="https://wa.me/5512991348745" target="_blank"
+       class="bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold text-sm px-4 py-2 rounded-md transition-all hover:scale-105">
+      Pedir Agora
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio" class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 z-10" style="background: linear-gradient(to bottom, rgba(9,9,11,0.2), rgba(9,9,11,0.6), #09090b)"></div>
+    <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=2072&auto=format&fit=crop"
+         alt="" class="absolute inset-0 w-full h-full object-cover opacity-40" />
+  </div>
+  <div class="relative z-20 max-w-6xl mx-auto px-4 text-center">
+    <div class="inline-flex items-center gap-1.5 mb-4 border border-amber-500/50 text-amber-500 bg-amber-500/10 px-3 py-1 rounded-full text-sm font-medium">
+      <i data-lucide="star" class="w-3 h-3" style="fill:#f59e0b"></i>
+      4.4 ★ · 82 avaliações
+    </div>
+    <h1 class="text-5xl md:text-8xl font-black tracking-tighter mb-6"
+        style="background:linear-gradient(to bottom,#fff,#a1a1aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+      QUINTAL DO PEDRO
+    </h1>
+    <p class="text-xl md:text-2xl text-zinc-300 max-w-2xl mx-auto mb-10 font-light">
+      Experiência gastronômica única com
+      <span class="text-amber-500 font-medium">hambúrgueres artesanais</span>
+      e pratos gourmet em Pindamonhangaba.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a href="#cardapio"
+         class="bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold px-8 py-4 text-lg rounded-md w-full sm:w-auto transition-all hover:scale-105 text-center">
+        Ver Cardápio
+      </a>
+      <a href="https://wa.me/5512991348745" target="_blank"
+         class="border border-zinc-700 hover:bg-zinc-800 text-white font-medium px-8 py-4 text-lg rounded-md w-full sm:w-auto transition-colors text-center">
+        Fazer Pedido
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="sobre" class="py-24 bg-zinc-900/30">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="relative rounded-2xl overflow-hidden img-zoom group" style="aspect-ratio:4/3;">
+        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1965&auto=format&fit=crop"
+             alt="Interior do Quintal do Pedro" class="object-cover w-full h-full" />
+        <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(9,9,11,0.8),transparent)"></div>
+        <div class="absolute bottom-6 left-6">
+          <p class="text-amber-500 font-bold text-lg">Ambiente Acolhedor</p>
+          <p class="text-zinc-300 text-sm">Perfeito para amigos e família</p>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Onde a Paixão Encontra o Sabor</h2>
+        <p class="text-zinc-400 leading-relaxed text-lg">
+          No Quintal do Pedro, acreditamos que um hambúrguer é muito mais do que apenas uma refeição.
+          É um momento de prazer, compartilhado com quem amamos. Nossos blends são preparados diariamente
+          com carnes selecionadas, garantindo suculência e sabor incomparáveis.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+          <div class="flex items-center gap-3 text-zinc-300">
+            <div class="p-2 bg-amber-500/10 rounded-lg"><i data-lucide="flame" class="w-5 h-5 text-amber-500"></i></div>
+            <span class="font-medium">Grelhado na brasa</span>
+          </div>
+          <div class="flex items-center gap-3 text-zinc-300">
+            <div class="p-2 bg-amber-500/10 rounded-lg"><i data-lucide="utensils" class="w-5 h-5 text-amber-500"></i></div>
+            <span class="font-medium">Ingredientes Premium</span>
+          </div>
+          <div class="flex items-center gap-3 text-zinc-300">
+            <div class="p-2 bg-amber-500/10 rounded-lg"><i data-lucide="check" class="w-5 h-5 text-amber-500"></i></div>
+            <span class="font-medium">Produção Artesanal</span>
+          </div>
+          <div class="flex items-center gap-3 text-zinc-300">
+            <div class="p-2 bg-amber-500/10 rounded-lg"><i data-lucide="star" class="w-5 h-5 text-amber-500"></i></div>
+            <span class="font-medium">Sabor Incomparável</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="cardapio" class="py-24">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-4 tracking-tight">Destaques do Cardápio</h2>
+      <p class="text-zinc-400 max-w-xl mx-auto">
+        Uma seleção dos nossos itens mais amados. Cada prato é preparado com cuidado artesanal e os melhores ingredientes.
+      </p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="menuGrid"></div>
+    <div class="mt-12 text-center">
+      <a href="https://wa.me/5512991348745?text=Ol%C3%A1!%20Quero%20ver%20o%20card%C3%A1pio%20completo." target="_blank"
+         class="border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-zinc-950 font-bold px-8 py-3 rounded-md transition-all inline-block">
+        Ver Cardápio Completo
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="py-24" style="background:rgba(245,158,11,0.05)">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex items-center justify-between mb-12">
+      <div>
+        <h2 class="text-3xl font-bold mb-2">O Que Dizem Nossos Clientes</h2>
+        <p class="text-zinc-400">Feedback real de quem viveu a experiência Quintal do Pedro.</p>
+      </div>
+      <div class="hidden sm:flex gap-1">
+        <i data-lucide="star" class="w-5 h-5 text-amber-500" style="fill:#f59e0b"></i>
+        <i data-lucide="star" class="w-5 h-5 text-amber-500" style="fill:#f59e0b"></i>
+        <i data-lucide="star" class="w-5 h-5 text-amber-500" style="fill:#f59e0b"></i>
+        <i data-lucide="star" class="w-5 h-5 text-amber-500" style="fill:#f59e0b"></i>
+        <i data-lucide="star" class="w-5 h-5 text-amber-500" style="fill:#f59e0b"></i>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl relative overflow-hidden">
+        <i data-lucide="quote" class="absolute top-6 right-8 w-10 h-10 text-zinc-800"></i>
+        <div class="relative z-10">
+          <div class="flex gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i><i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i><i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i><i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i><i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i>
+          </div>
+          <p class="text-zinc-300 mb-6 italic">"Todas vezes que fui, com amigos, família, os lanches sempre chegaram quentinhos. O atendimento é excelente!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center font-bold text-amber-500">M</div>
+            <span class="font-medium">Mariana Silva</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl relative overflow-hidden">
+        <i data-lucide="quote" class="absolute top-6 right-8 w-10 h-10 text-zinc-800"></i>
+        <div class="relative z-10">
+          <div class="flex gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i><i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i><i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i><i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i><i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i>
+          </div>
+          <p class="text-zinc-300 mb-6 italic">"Lugar top para comer um hambúrguer gourmet! O ambiente é super bem decorado e acolhedor."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center font-bold text-amber-500">R</div>
+            <span class="font-medium">Ricardo Oliveira</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl relative overflow-hidden">
+        <i data-lucide="quote" class="absolute top-6 right-8 w-10 h-10 text-zinc-800"></i>
+        <div class="relative z-10">
+          <div class="flex gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i><i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i><i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i><i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i><i data-lucide="star" class="w-4 h-4 text-amber-500" style="fill:#f59e0b"></i>
+          </div>
+          <p class="text-zinc-300 mb-6 italic">"Provamos o filé mignon com molho de gorgonzola, divinooo. Recomendo muito!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center font-bold text-amber-500">A</div>
+            <span class="font-medium">Ana Paula</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contato" class="py-24">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid lg:grid-cols-2 gap-12">
+      <div class="space-y-8">
+        <div>
+          <h2 class="text-4xl font-bold mb-6 tracking-tight">Onde Estamos</h2>
+          <p class="text-zinc-400 mb-8">Venha nos visitar no coração de Pindamonhangaba. Um espaço planejado para você se sentir em casa.</p>
+        </div>
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <div class="p-3 bg-amber-500/10 rounded-xl shrink-0"><i data-lucide="map-pin" class="w-6 h-6 text-amber-500"></i></div>
+            <div>
+              <p class="font-bold text-lg">Endereço</p>
+              <p class="text-zinc-400">R. Laérte Machado Guimarães, 223</p>
+              <p class="text-zinc-400">São Benedito, Pindamonhangaba - SP</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="p-3 bg-amber-500/10 rounded-xl shrink-0"><i data-lucide="clock" class="w-6 h-6 text-amber-500"></i></div>
+            <div>
+              <p class="font-bold text-lg">Horário de Funcionamento</p>
+              <p class="text-zinc-400">Terça a Domingo: 18:30 às 23:30</p>
+              <span class="mt-2 inline-block bg-green-500/20 text-green-500 border border-green-500/20 text-xs font-medium px-2.5 py-1 rounded-full">Aberto Agora</span>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="p-3 bg-amber-500/10 rounded-xl shrink-0"><i data-lucide="phone" class="w-6 h-6 text-amber-500"></i></div>
+            <div>
+              <p class="font-bold text-lg">Contato</p>
+              <a href="tel:12991348745" class="text-zinc-400 hover:text-amber-500 transition-colors">(12) 99134-8745</a>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3 pt-4">
+          <div class="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-full text-sm text-zinc-400">
+            <i data-lucide="utensils" class="w-4 h-4"></i> No local
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-full text-sm text-zinc-400">
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i> Retirada
+          </div>
+          <div class="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-full text-sm text-zinc-400">
+            <i data-lucide="truck" class="w-4 h-4"></i> Entrega
+          </div>
+        </div>
+      </div>
+      <div class="relative rounded-2xl overflow-hidden border border-zinc-800 group bg-zinc-900 flex flex-col items-center justify-center p-8 text-center" style="min-height:400px;">
+        <div class="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <i data-lucide="navigation" class="w-8 h-8 text-amber-500"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Pindamonhangaba, SP</h3>
+        <p class="text-zinc-500 mb-6 max-w-xs">R. Laérte Machado Guimarães, 223 - São Benedito</p>
+        <a href="https://maps.google.com/?q=Quintal+do+Pedro+Pindamonhangaba" target="_blank"
+           class="bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold px-6 py-3 rounded-md transition-colors inline-block">
+          Abrir no Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-zinc-950 border-t border-zinc-900 py-16">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid md:grid-cols-4 gap-12">
+      <div class="md:col-span-2">
+        <span class="text-2xl font-black tracking-tighter text-amber-500 mb-6 block uppercase">Quintal do Pedro</span>
+        <p class="text-zinc-500 max-w-sm mb-8">
+          Hambúrgueres artesanais de verdade, feitos com paixão e ingredientes selecionados. O seu quintal preferido em Pindamonhangaba.
+        </p>
+        <div class="flex gap-4">
+          <a href="#" class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-amber-500 hover:text-zinc-950 hover:border-amber-500 transition-all">
+            <i data-lucide="instagram" class="w-5 h-5"></i>
+          </a>
+          <a href="https://wa.me/5512991348745" target="_blank"
+             class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-amber-500 hover:text-zinc-950 hover:border-amber-500 transition-all">
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-bold mb-6">Links Rápidos</h4>
+        <ul class="space-y-4 text-zinc-500 text-sm">
+          <li><a href="#inicio"    class="hover:text-amber-500 transition-colors">Início</a></li>
+          <li><a href="#sobre"     class="hover:text-amber-500 transition-colors">Sobre Nós</a></li>
+          <li><a href="#cardapio"  class="hover:text-amber-500 transition-colors">Cardápio</a></li>
+          <li><a href="#contato"   class="hover:text-amber-500 transition-colors">Contato</a></li>
+          <li><a href="admin.html" class="hover:text-amber-500 transition-colors">Área Admin</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-6">Contato</h4>
+        <ul class="space-y-4 text-zinc-500 text-sm">
+          <li class="flex items-center gap-2">
+            <i data-lucide="phone" class="w-4 h-4 text-amber-500 shrink-0"></i> (12) 99134-8745
+          </li>
+          <li class="flex items-start gap-2">
+            <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+            <span>R. Laérte Machado Guimarães, 223<br/>Pindamonhangaba - SP</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="my-12 border-t border-zinc-900"></div>
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-600 text-xs">
+      <p>© <span id="year"></span> Quintal do Pedro. Todos os direitos reservados.</p>
+      <p>Desenvolvido com paixão por hambúrgueres.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/5512991348745?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20pedido." target="_blank"
+   class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-all hover:scale-110"
+   style="background:#25D366;box-shadow:0 4px 20px rgba(37,211,102,0.4);">
+  <i data-lucide="message-circle" class="w-6 h-6 text-white"></i>
+</a>
+
+<script>
+const DEFAULT_MENU = [
+  { id:'b1', name:'Hambúrguer Clássico',        description:'Pão brioche, blend bovino 160g, queijo cheddar, alface, tomate e maionese da casa.', price:32.90, category:'Burger' },
+  { id:'b2', name:'Filé Mignon com Gorgonzola', description:'Tiras de filé mignon suculentas cobertas com um cremoso molho de gorgonzola artesanal.', price:48.90, category:'Especialidade' },
+  { id:'p1', name:'Batata Rústica',              description:'Batatas cortadas à mão, temperadas com alecrim, alho e páprica defumada.', price:24.90, category:'Acompanhamento' },
+  { id:'d1', name:'Milk-shake de Ovomaltine',   description:'Batido na hora com sorvete premium e muito Ovomaltine crocante.', price:22.90, category:'Bebida' },
+  { id:'d2', name:'Mojito',                     description:'Refrescante coquetel com hortelã fresca, limão, rum e água gaseificada.', price:26.90, category:'Drink' },
+  { id:'p2', name:'Salada Caesar',              description:'Alface americana, croutons, queijo parmesão e o nosso molho caesar exclusivo.', price:28.90, category:'Leve' },
+];
+
+function getMenuItems() {
+  const items = JSON.parse(JSON.stringify(DEFAULT_MENU));
+  try {
+    const saved = localStorage.getItem('qp_menu_v2');
+    if (saved) {
+      const prices = JSON.parse(saved);
+      items.forEach(item => { if (prices[item.id] !== undefined) item.price = prices[item.id]; });
+    }
+  } catch(e) {}
+  return items;
+}
+
+function fmt(n) { return 'R$ ' + Number(n).toFixed(2).replace('.', ','); }
+
+function renderMenu() {
+  const grid = document.getElementById('menuGrid');
+  grid.innerHTML = getMenuItems().map(item => `
+    <div class="menu-card bg-zinc-900/50 border rounded-2xl overflow-hidden flex flex-col">
+      <div class="p-6 pb-3">
+        <div class="flex justify-between items-start mb-2">
+          <span class="bg-zinc-800 text-zinc-400 text-xs px-2 py-1 rounded">${item.category}</span>
+          <span class="text-amber-500 font-bold">${fmt(item.price)}</span>
+        </div>
+        <h3 class="card-title text-xl font-semibold mt-2 transition-colors">${item.name}</h3>
+      </div>
+      <div class="px-6 pb-4 flex-1">
+        <p class="text-zinc-400 text-sm line-clamp-2">${item.description}</p>
+      </div>
+      <div class="px-6 pb-6">
+        <button class="chevron-row flex items-center gap-1 text-zinc-400 text-sm font-medium bg-transparent border-none cursor-pointer p-0">
+          Ver detalhes <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+        </button>
+      </div>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+renderMenu();
+lucide.createIcons();
+</script>
+</body>
+</html>
